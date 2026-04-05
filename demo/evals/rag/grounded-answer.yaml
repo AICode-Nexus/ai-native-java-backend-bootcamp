@@ -1,0 +1,8 @@
+name: grounded-rag-answer
+description: Verify the RAG path returns citations and a grounded answer.
+cases:
+  - input:
+      question: What is this project?
+    expected:
+      mode: RAG
+      citations_min: 1

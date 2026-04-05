@@ -50,3 +50,23 @@
 - `app.redis`
 - `app.elasticsearch`
 - `app.rabbitmq`
+- `app.retrieval`
+- `app.session`
+
+## 当前主链路
+
+当前 demo 已具备以下最小链路：
+
+1. 健康检查与统一响应
+2. 同步聊天与流式聊天
+3. 文档上传、切片与内存入库
+4. RAG 检索回答与引用返回
+5. 混合检索边界、Tool Registry、Workflow 骨架
+6. 只读 SQL 预览示例
+
+## 治理与评测
+
+- 安全策略：`src/main/java/com/example/ainative/ai/safety`
+- 请求日志：`src/main/java/com/example/ainative/ops/logging`
+- 指标门面：`src/main/java/com/example/ainative/ops/metrics`
+- 最小 evals：`evals/`

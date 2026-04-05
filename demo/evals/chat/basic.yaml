@@ -1,0 +1,8 @@
+name: basic-chat-regression
+description: Verify the synchronous chat API still returns a structured answer payload.
+cases:
+  - input:
+      message: hello
+    expected:
+      answer_contains: stub-answer
+      model: stub-model

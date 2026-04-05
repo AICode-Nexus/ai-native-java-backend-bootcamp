@@ -1,0 +1,42 @@
+name: docs-check
+
+on:
+  push:
+    paths:
+      - "README.md"
+      - "课程设计文档.md"
+      - "演讲大纲.md"
+      - "第*课-*/final-content.md"
+      - "课后练习/**"
+  pull_request:
+    paths:
+      - "README.md"
+      - "课程设计文档.md"
+      - "演讲大纲.md"
+      - "第*课-*/final-content.md"
+      - "课后练习/**"
+
+jobs:
+  docs-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify core docs
+        run: |
+          test -f README.md
+          test -f 课程设计文档.md
+          test -f 演讲大纲.md
+          grep -q '^# ' README.md
+          grep -q '^# ' 课程设计文档.md
+          grep -q '^# ' 演讲大纲.md
+      - name: Verify lesson content and exercises
+        run: |
+          find 第*课-* -name final-content.md | while read -r file; do
+            grep -q '^# ' "$file"
+          done
+          find 课后练习/第* -name 练习.md | while read -r file; do
+            grep -q '## 基础题' "$file"
+            grep -q '## 进阶题' "$file"
+            grep -q '## 挑战题' "$file"
+            grep -q '## 验收标准' "$file"
+          done
