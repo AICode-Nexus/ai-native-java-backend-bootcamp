@@ -36,6 +36,12 @@ public class DocumentIngestService {
         return storage.getOrDefault(documentId, List.of());
     }
 
+    public List<DocumentChunk> getAllChunks() {
+        return storage.values().stream()
+            .flatMap(List::stream)
+            .toList();
+    }
+
     private static void validateSupportedFile(String fileName) {
         if (!(fileName.endsWith(".txt") || fileName.endsWith(".md"))) {
             throw new IllegalArgumentException("Only .txt and .md files are supported in the current lesson");
