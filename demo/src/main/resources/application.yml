@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: ai-native-backend-demo
+
+server:
+  port: 8080

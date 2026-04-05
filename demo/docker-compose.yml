@@ -1,0 +1,26 @@
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ainative
+      MYSQL_USER: ainative
+      MYSQL_PASSWORD: ainative
+    ports:
+      - "3306:3306"
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.15.0
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+    ports:
+      - "9200:9200"
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
