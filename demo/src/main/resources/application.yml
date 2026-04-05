@@ -26,3 +26,7 @@ app:
   rabbitmq:
     host: ${RABBITMQ_HOST:localhost}
     port: ${RABBITMQ_PORT:5672}
+  retrieval:
+    top-k: ${RETRIEVAL_TOP_K:3}
+  session:
+    memory-provider: ${SESSION_MEMORY_PROVIDER:redis}
