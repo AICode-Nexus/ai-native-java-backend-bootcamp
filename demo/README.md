@@ -24,9 +24,29 @@
 
 ## 本地基础设施
 
-未来通过以下文件启动本地依赖：
+通过以下文件启动本地依赖：
 
 - `docker-compose.yml`
 - `scripts/start-infra.sh`
 - `scripts/stop-infra.sh`
 - `scripts/load-sample-data.sh`
+
+## 快速开始
+
+1. 准备环境变量
+   - 可直接复制 `.env.example` 为 `.env`
+   - 如果没有 `.env`，启动脚本会回退使用 `.env.example`
+2. 启动本地依赖
+   - `bash scripts/start-infra.sh`
+3. 停止本地依赖
+   - `bash scripts/stop-infra.sh`
+
+## 当前配置模型
+
+当前通过 `app.*` 命名空间统一绑定：
+
+- `app.ai`
+- `app.mysql`
+- `app.redis`
+- `app.elasticsearch`
+- `app.rabbitmq`

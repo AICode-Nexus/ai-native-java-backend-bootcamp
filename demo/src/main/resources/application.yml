@@ -4,3 +4,25 @@ spring:
 
 server:
   port: 8080
+
+app:
+  ai:
+    provider: ${AI_PROVIDER:openai}
+    api-key: ${AI_API_KEY:}
+    base-url: ${AI_BASE_URL:}
+    model: ${AI_MODEL:gpt-4.1-mini}
+  mysql:
+    host: ${MYSQL_HOST:localhost}
+    port: ${MYSQL_PORT:3306}
+    database: ${MYSQL_DATABASE:ainative}
+    username: ${MYSQL_USERNAME:ainative}
+    password: ${MYSQL_PASSWORD:ainative}
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+  elasticsearch:
+    host: ${ES_HOST:localhost}
+    port: ${ES_PORT:9200}
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}

@@ -1,26 +1,33 @@
+name: ai-native-backend-demo
+
 services:
   mysql:
     image: mysql:8.4
+    restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: ainative
-      MYSQL_USER: ainative
-      MYSQL_PASSWORD: ainative
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-ainative}
+      MYSQL_USER: ${MYSQL_USERNAME:-ainative}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-ainative}
     ports:
-      - "3306:3306"
+      - "${MYSQL_PORT:-3306}:3306"
   redis:
     image: redis:7
+    restart: unless-stopped
     ports:
-      - "6379:6379"
+      - "${REDIS_PORT:-6379}:6379"
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.15.0
+    restart: unless-stopped
     environment:
-      discovery.type: single-node
+      discovery.type: "single-node"
       xpack.security.enabled: "false"
+      ES_JAVA_OPTS: ${ES_JAVA_OPTS:-"-Xms512m -Xmx512m"}
     ports:
-      - "9200:9200"
+      - "${ES_PORT:-9200}:9200"
   rabbitmq:
     image: rabbitmq:3-management
+    restart: unless-stopped
     ports:
-      - "5672:5672"
-      - "15672:15672"
+      - "${RABBITMQ_PORT:-5672}:5672"
+      - "${RABBITMQ_MANAGEMENT_PORT:-15672}:15672"
