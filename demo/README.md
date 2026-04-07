@@ -135,3 +135,13 @@
 - 指标门面：`src/main/java/com/example/ainative/ops/metrics`
 - 最小 evals：`evals/`
 - 测试：`src/test/java/com/example/ainative`
+
+## 公众号 / 获取更新
+
+如果你希望持续获取课程更新、训练营通知与相关文章，可以关注公众号：
+
+- 社区页：[`../docs/community.md`](../docs/community.md)
+
+<p align="left">
+  <img src="../docs/assets/wechat-official-account-qrcode.jpg" alt="公众号二维码" width="220" />
+</p>

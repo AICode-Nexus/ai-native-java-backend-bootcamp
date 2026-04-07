@@ -148,6 +148,8 @@ cd demo
 
 关注公众号，获取课程更新、训练营通知与相关文章。
 
+- 社区页：[docs/community.md](./docs/community.md)
+
 <p align="left">
   <img src="./docs/assets/wechat-official-account-qrcode.jpg" alt="公众号二维码" width="260" />
 </p>
