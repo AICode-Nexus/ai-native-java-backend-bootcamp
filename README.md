@@ -143,3 +143,11 @@ cd demo
 - [AI-Native-Java项目配置模板.md](./AI-Native-Java项目配置模板.md)
 - [演讲大纲.md](./演讲大纲.md)
 - [课后练习总览](./课后练习/README.md)
+
+## 公众号 / 获取更新
+
+关注公众号，获取课程更新、训练营通知与相关文章。
+
+<p align="left">
+  <img src="./docs/assets/wechat-official-account-qrcode.jpg" alt="公众号二维码" width="260" />
+</p>
