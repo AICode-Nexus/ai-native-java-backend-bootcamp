@@ -1,62 +1,126 @@
 # 第7课 Agent 与 Tools
 
-## 本课目标
+## 先看一个真实问题
 
-- 把模型调用工具这件事变成受控的工程能力
-- 建立工具注册、执行结果和 allowlist 约束
-- 明确 Tool 不等于直接访问数据库或系统命令
+系统做到知识问答之后，业务方通常很快就会提出新的期待：
+
+- 能不能直接帮我查数据库
+- 能不能根据问题自动调用内部搜索
+- 能不能把结果进一步加工成可执行动作
+
+这时系统就从“只回答”进入“可能执行动作”的阶段了。  
+一旦跨过这个点，风险也会同步升级。AI 系统出错，不再只是“说错了”，还可能变成“做错了”。
+
+所以这节课讲的不是“怎么让模型更聪明地调用工具”，而是“怎么把工具调用变成受控的工程能力”。
+
+## 本课你要拿走什么
+
+- 理解 Tool 和 Agent 不是一回事
+- 掌握工具注册、执行结果和 allowlist 的最小设计
+- 明白为什么 Tool Calling 的核心不是功能多，而是边界清楚
 
 ## 本课对应 demo 代码
 
-- 工具定义：[ToolDefinition.java](/Users/admin/Desktop/iflytek/培训/2026/ai-native-java-backend-bootcamp/demo/src/main/java/com/example/ainative/agent/tool/ToolDefinition.java)
-- 工具注册表：[ToolRegistry.java](/Users/admin/Desktop/iflytek/培训/2026/ai-native-java-backend-bootcamp/demo/src/main/java/com/example/ainative/agent/tool/ToolRegistry.java)
-- 执行结果：[ToolExecutionResult.java](/Users/admin/Desktop/iflytek/培训/2026/ai-native-java-backend-bootcamp/demo/src/main/java/com/example/ainative/agent/executor/ToolExecutionResult.java)
+- 工具定义：[`../demo/src/main/java/com/example/ainative/agent/tool/ToolDefinition.java`](../demo/src/main/java/com/example/ainative/agent/tool/ToolDefinition.java)
+- 工具注册表：[`../demo/src/main/java/com/example/ainative/agent/tool/ToolRegistry.java`](../demo/src/main/java/com/example/ainative/agent/tool/ToolRegistry.java)
+- 执行结果：[`../demo/src/main/java/com/example/ainative/agent/executor/ToolExecutionResult.java`](../demo/src/main/java/com/example/ainative/agent/executor/ToolExecutionResult.java)
+- 测试：[`../demo/src/test/java/com/example/ainative/agent/tool/ToolRegistryTest.java`](../demo/src/test/java/com/example/ainative/agent/tool/ToolRegistryTest.java)
 
-## 为什么 Tool Calling 在企业场景里这么敏感
+## Tool 和 Agent 到底怎么区分
 
-知识助手只“回答问题”时，风险主要是幻觉；一旦开始“调用工具”，风险马上升级成执行风险。  
-比如：
+这是这一课最需要讲清楚的概念。
 
-- 查数据库
-- 调用内部搜索
-- 触发工作流
-- 改写业务状态
+### Tool 是什么
 
-所以这一课的核心不是让模型“尽可能聪明”，而是让工具系统“足够受控”。
+Tool 是一个受控能力单元，它至少要满足：
 
-## 注册表为什么一定要有 allowlist
+- 有唯一名称
+- 输入输出边界明确
+- 可注册、可限制、可审计
 
-当前 demo 的 `ToolRegistry` 做了三件很关键的事：
+Tool 更像“系统能力接口”。
+
+### Agent 是什么
+
+Agent 则更像“策略和决策层”。  
+它会决定：
+
+- 要不要调用工具
+- 调哪个工具
+- 调用结果如何继续进入下一步
+
+所以 Tool 是资源能力，Agent 是调度逻辑。  
+如果把两者糊在一个类里，系统很快就会失控。
+
+## 为什么 Tool Registry 必须成为独立组件
+
+当前 demo 的 `ToolRegistry` 做的事情看起来不复杂，但每一条都很关键：
 
 1. 工具必须先注册
 2. 名称不能重复
-3. 只有 allowlist 内工具才能执行
+3. 未注册工具要返回显式错误
+4. 不在 allowlist 里的工具禁止执行
 
-这三点听起来简单，但它们决定了系统后续能不能扩到生产环境。没有 allowlist 的 Tool Calling，本质上是在给模型开后门。
+这四件事本质上是在把“模型想调用工具”这件事，从一种不稳定冲动，变成可治理的后端能力。
 
-## 这一课要重点区分的两个概念
+## 为什么 allowlist 是 Tool Calling 的底线
 
-### Tool
+如果没有 allowlist，Tool Calling 在企业系统里几乎不可能放心上线。  
+因为模型一旦能够随意枚举和尝试工具，后果会非常危险：
 
-Tool 是一个边界清晰、输入输出明确、受控可审计的能力单元。
+- 越权访问
+- 调用错误工具
+- 执行风险放大
+- 审计边界模糊
 
-### Agent
+所以这节课一定要让学员建立一个非常明确的认知：
 
-Agent 是一个会决定“什么时候用哪个 Tool”的策略层。  
-也就是说，Tool 是资源接口，Agent 是调度策略，不要把两者糊成一个万能 Service。
+“工具默认不是开放的，而是默认关闭、按白名单开启。”
 
-## 课堂建议
+## 当前 demo 的教学价值在哪
 
-- 先展示一个非法工具调用为什么要被拒绝
-- 再展示同名工具重复注册为什么是工程风险
-- 最后让学员理解：工具越强，注册表和安全策略越重要
+当前仓库还没有做真正的模型驱动 Tool Calling，但已经把最核心的工程骨架立起来了：
 
-## 常见误区
+- Tool 的定义形式
+- Registry 的注册和查找规则
+- 执行结果的结构化表达
 
-- 误区一：把 Tool 写成直接暴露底层数据库连接
-- 误区二：所有工具都默认开放
-- 误区三：把错误吞掉，只返回“执行失败”
+这使得后续无论接：
+
+- LangChain4j Tools
+- Spring AI Tool Calling
+- 自定义 Agent 编排
+
+都不会推翻当前设计。
+
+## 课堂建议怎么讲
+
+### 第一步：先讲风险升级
+
+先让学员明确，系统从“回答”升级到“调用工具”之后，风险等级已经变了。
+
+### 第二步：再讲注册表
+
+把 `ToolRegistryTest` 当成课堂主材料来讲最合适。  
+因为它直接暴露了设计意图：
+
+- 为什么不允许重复注册
+- 为什么未注册必须显式报错
+- 为什么 allowlist 是底线
+
+### 第三步：最后讲 Agent 的位置
+
+告诉学员，当前我们是在先搭好“工具系统”，而不是急着上“万能 Agent”。  
+这是非常重要的教学顺序。
+
+## 学员最容易踩的坑
+
+- 误区一：把 Tool 写成直接暴露底层数据库或系统权限
+- 误区二：所有工具默认都开放
+- 误区三：出错时只返回“失败”，不暴露明确错误语义
+- 误区四：把 Tool 和 Agent 混成一个万能服务
 
 ## 本课小结
 
-这一课建立的是“模型可以调用能力，但不能乱调用能力”的基础。下一课会把工具调用放入固定工作流和异步任务，让长链路任务真正可观察。
+这一课建立的是 Tool Calling 的工程底座，而不是花哨的智能代理。  
+当工具系统边界先站稳后，下一课我们才有资格去讨论另一件事：长链路任务应该如何进入固定工作流和异步任务系统。
