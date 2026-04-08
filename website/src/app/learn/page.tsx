@@ -1,5 +1,11 @@
 import { mainCourses } from '@/lib/lessons'
-import { corePrinciples, courseStats, developerLifecycleMap } from '@/lib/site-content'
+import {
+  corePrinciples,
+  courseStats,
+  developerLifecycleMap,
+  exerciseOverviewUrl,
+  exerciseTemplateUrl,
+} from '@/lib/site-content'
 import Link from 'next/link'
 
 export default function LearnPage() {
@@ -17,6 +23,37 @@ export default function LearnPage() {
               {item.label} · {item.value}
             </span>
           ))}
+        </div>
+      </div>
+
+      <div className="mb-12 rounded-xl border bg-secondary/30 p-6">
+        <h2 className="mb-3 font-semibold">练习方式</h2>
+        <div className="space-y-2 text-sm text-muted-foreground">
+          <p>每节正文中的 `课后练习` 段都会直接指向对应练习文件，建议读完正文后立刻进入该课练习。</p>
+          <p>
+            如果你希望保留 AI 输入、人工删改和验证过程，可以直接使用
+            <a
+              href={exerciseTemplateUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-1 font-medium text-primary hover:underline"
+            >
+              通用提交模板
+            </a>
+            。
+          </p>
+          <p>
+            想看 12 节练习的统一说明、阶段推进建议和验收原则，可以打开
+            <a
+              href={exerciseOverviewUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-1 font-medium text-primary hover:underline"
+            >
+              课后练习总览
+            </a>
+            。
+          </p>
         </div>
       </div>
 

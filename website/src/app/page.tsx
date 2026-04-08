@@ -3,6 +3,8 @@ import {
   corePrinciples,
   courseStats,
   developerLifecycleMap,
+  exerciseOverviewUrl,
+  exerciseTemplateUrl,
   learningTracks,
   resourceLinks,
 } from '@/lib/site-content'
@@ -21,7 +23,8 @@ export default function HomePage() {
           </h1>
           <p className="max-w-3xl text-base leading-8 text-slate-600 md:text-lg">
             这套课程不再主讲如何做一个 AI 产品，而是主讲后端工程师怎样把 AI 变成研发提效工具链。
-            主线课程围绕研发生命周期展开，进阶专题单独保留 AI-Native 系统建设内容。
+            主线课程围绕研发生命周期展开，进阶专题单独保留 AI-Native 系统建设内容。每节正文都配有课后练习入口，
+            练习统一要求保留结构化输入、人工判断和验证结果。
           </p>
         </div>
 
@@ -38,9 +41,30 @@ export default function HomePage() {
           >
             查看进阶专题
           </Link>
+          <a
+            href={exerciseOverviewUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center rounded-lg border border-border bg-background px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
+          >
+            查看练习总览
+          </a>
         </div>
 
-        <div className="grid gap-3 md:grid-cols-3">
+        <p className="text-sm text-muted-foreground">
+          推荐学法：先读课程正文，再打开课后练习；如果要留痕或组织评审，可直接复用
+          <a
+            href={exerciseTemplateUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-1 font-medium text-primary hover:underline"
+          >
+            通用提交模板
+          </a>
+          。
+        </p>
+
+        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
           {courseStats.map((item) => (
             <div key={item.label} className="rounded-xl border bg-background p-4">
               <div className="text-sm text-muted-foreground">{item.label}</div>
@@ -92,7 +116,7 @@ export default function HomePage() {
           <div>
             <h2 className="text-2xl font-semibold">主线课程预览</h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              按需求、设计、编码、测试、排障、发布和团队落地顺序推进。
+              按需求、设计、编码、测试、排障、发布和团队落地顺序推进，每节都配套可执行练习。
             </p>
           </div>
           <Link href="/learn" className="text-sm font-medium text-primary hover:underline">

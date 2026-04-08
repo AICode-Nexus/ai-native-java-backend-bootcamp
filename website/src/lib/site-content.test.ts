@@ -9,9 +9,12 @@ import {
 } from './site-content.ts'
 
 test('site-content exposes the homepage and learn overview sections', () => {
-  assert.equal(courseStats.length, 3)
+  assert.deepEqual(
+    courseStats.map((item) => item.label),
+    ['主线课程', '进阶专题', '练习体系', '技术底座']
+  )
   assert.equal(developerLifecycleMap.length >= 6, true)
   assert.equal(learningTracks.length, 2)
   assert.equal(corePrinciples.length, 5)
-  assert.equal(resourceLinks.length >= 3, true)
+  assert.equal(resourceLinks.length >= 5, true)
 })

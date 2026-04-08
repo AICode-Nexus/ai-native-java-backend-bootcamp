@@ -27,9 +27,13 @@ export interface ResourceLink {
 
 const repoBaseUrl = 'https://github.com/AICode-Nexus/ai-native-java-backend-bootcamp'
 
+export const exerciseOverviewUrl = `${repoBaseUrl}/blob/main/%E8%AF%BE%E5%90%8E%E7%BB%83%E4%B9%A0/README.md`
+export const exerciseTemplateUrl = `${repoBaseUrl}/blob/main/%E8%AF%BE%E5%90%8E%E7%BB%83%E4%B9%A0/%E9%80%9A%E7%94%A8%E6%8F%90%E4%BA%A4%E6%A8%A1%E6%9D%BF.md`
+
 export const courseStats: SiteStat[] = [
   { label: '主线课程', value: '12 节' },
   { label: '进阶专题', value: '4 个' },
+  { label: '练习体系', value: '12 套 + 通用模板' },
   { label: '技术底座', value: 'Java 21 + Spring Boot 3.x' },
 ]
 
@@ -48,7 +52,7 @@ export const learningTracks: LearningTrack[] = [
   {
     title: '主线课程',
     href: '/learn',
-    description: '围绕传统后端研发全流程，讲清 AI 在每个研发动作里的正确位置。',
+    description: '围绕传统后端研发全流程，讲清 AI 在每个研发动作里的正确位置，并给出每课对应练习。',
   },
   {
     title: '进阶专题',
@@ -95,6 +99,16 @@ export const resourceLinks: ResourceLink[] = [
     label: '课程设计文档',
     href: `${repoBaseUrl}/blob/main/%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3.md`,
     description: '完整课程定位、主线与进阶专题设计。',
+  },
+  {
+    label: '课后练习总览',
+    href: exerciseOverviewUrl,
+    description: '统一查看 12 节主线课练习入口、阶段推进建议和验收原则。',
+  },
+  {
+    label: '练习通用提交模板',
+    href: exerciseTemplateUrl,
+    description: '记录 AI 输入、人工删改和验证结果的统一交付模板。',
   },
   {
     label: '社区与更新',
