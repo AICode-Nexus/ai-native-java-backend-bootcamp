@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-// @ts-expect-error Node test runner requires the explicit .ts extension for local ESM imports.
 import { getLessonFileSpecs, readLessonMarkdown } from './lesson-files.ts'
 
 test('every lesson metadata entry resolves to an existing final-content.md', () => {
