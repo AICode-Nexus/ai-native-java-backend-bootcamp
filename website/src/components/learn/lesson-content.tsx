@@ -1,10 +1,5 @@
 'use client'
 
-import mermaid from 'mermaid'
-import { useEffect, useState } from 'react'
-import ReactMarkdown from 'react-markdown'
-import rehypeHighlight from 'rehype-highlight'
-import remarkGfm from 'remark-gfm'
 import {
   type TocItem,
   buildProcessedLessonContent,
@@ -12,6 +7,11 @@ import {
   generateToc,
   slugifyHeading,
 } from '@/lib/lesson-markdown'
+import mermaid from 'mermaid'
+import { useEffect, useState } from 'react'
+import ReactMarkdown from 'react-markdown'
+import rehypeHighlight from 'rehype-highlight'
+import remarkGfm from 'remark-gfm'
 
 let mermaidId = 0
 
@@ -131,18 +131,10 @@ export function LessonContent({ content }: { content: string }) {
   const toc = generateToc(processedContent)
   let headingIndex = 0
 
-  const getHeadingId = (
-    level: number,
-    children: React.ReactNode,
-    fallbackText: string
-  ): string => {
+  const getHeadingId = (level: number, children: React.ReactNode, fallbackText: string): string => {
     const nextHeading = toc[headingIndex]
 
-    if (
-      nextHeading &&
-      nextHeading.level === level &&
-      nextHeading.text === fallbackText
-    ) {
+    if (nextHeading && nextHeading.level === level && nextHeading.text === fallbackText) {
       headingIndex += 1
       return nextHeading.id
     }
@@ -204,8 +196,7 @@ export function LessonContent({ content }: { content: string }) {
               </p>
             ),
             code: ({ className, children, ...props }) => {
-              const isBlock =
-                className?.includes('language-') || className?.includes('hljs')
+              const isBlock = className?.includes('language-') || className?.includes('hljs')
 
               if (isBlock) {
                 const langMatch = className?.match(/language-(\w+)/)

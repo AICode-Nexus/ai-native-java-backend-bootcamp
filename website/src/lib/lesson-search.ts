@@ -25,20 +25,14 @@ function buildContentExcerpt(content: string, query: string): string {
   }
 
   const excerptStart = Math.max(0, matchIndex - 36)
-  const excerptEnd = Math.min(
-    normalizedContent.length,
-    matchIndex + query.length + 48
-  )
+  const excerptEnd = Math.min(normalizedContent.length, matchIndex + query.length + 48)
   const prefix = excerptStart > 0 ? '...' : ''
   const suffix = excerptEnd < normalizedContent.length ? '...' : ''
 
   return `${prefix}${normalizedContent.slice(excerptStart, excerptEnd)}${suffix}`
 }
 
-export function getHighlightParts(
-  text: string,
-  query: string
-): HighlightPart[] {
+export function getHighlightParts(text: string, query: string): HighlightPart[] {
   const normalizedQuery = query.trim()
 
   if (!text || !normalizedQuery) {
@@ -79,10 +73,7 @@ export function getHighlightParts(
   return parts
 }
 
-export function searchLessons(
-  query: string,
-  entries: LessonSearchEntry[]
-): LessonSearchResult[] {
+export function searchLessons(query: string, entries: LessonSearchEntry[]): LessonSearchResult[] {
   if (!query.trim()) {
     return []
   }
@@ -105,9 +96,7 @@ export function searchLessons(
       continue
     }
 
-    const matchedTag = lesson.tags.find((tag) =>
-      tag.toLowerCase().includes(lowerQuery)
-    )
+    const matchedTag = lesson.tags.find((tag) => tag.toLowerCase().includes(lowerQuery))
     if (matchedTag) {
       results.push({ ...lesson, matchType: 'tag', matchedText: matchedTag })
       continue

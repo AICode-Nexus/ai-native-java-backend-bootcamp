@@ -1,7 +1,7 @@
 'use client'
 
-import Link from 'next/link'
 import type { LessonSearchEntry } from '@/lib/lesson-search'
+import Link from 'next/link'
 import { useMobileNav } from './mobile-nav-context'
 import { SearchDialog } from './search-dialog'
 
@@ -28,7 +28,9 @@ export function Header({ searchEntries }: HeaderProps) {
               viewBox="0 0 18 18"
               fill="none"
               className="text-foreground"
+              aria-hidden="true"
             >
+              <title>{isOpen ? '关闭菜单' : '打开菜单'}</title>
               {isOpen ? (
                 <>
                   <line
@@ -92,43 +94,23 @@ export function Header({ searchEntries }: HeaderProps) {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               className="shrink-0"
+              role="img"
+              aria-labelledby="site-logo-title"
             >
+              <title id="site-logo-title">AI-Native Java Backend Bootcamp 标志</title>
               <defs>
                 <linearGradient id="backend-grad" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" style={{ stopColor: '#38bdf8', stopOpacity: 1 }} />
                   <stop offset="100%" style={{ stopColor: '#2563eb', stopOpacity: 1 }} />
                 </linearGradient>
               </defs>
-              <rect
-                x="4"
-                y="6"
-                width="24"
-                height="5"
-                rx="2.5"
-                fill="url(#backend-grad)"
-              />
-              <rect
-                x="4"
-                y="14"
-                width="24"
-                height="5"
-                rx="2.5"
-                fill="url(#backend-grad)"
-              />
-              <rect
-                x="4"
-                y="22"
-                width="16"
-                height="5"
-                rx="2.5"
-                fill="url(#backend-grad)"
-              />
+              <rect x="4" y="6" width="24" height="5" rx="2.5" fill="url(#backend-grad)" />
+              <rect x="4" y="14" width="24" height="5" rx="2.5" fill="url(#backend-grad)" />
+              <rect x="4" y="22" width="16" height="5" rx="2.5" fill="url(#backend-grad)" />
             </svg>
             <div>
               <div className="text-sm font-semibold">AI-Native Java Backend Bootcamp</div>
-              <div className="hidden text-xs text-muted-foreground sm:block">
-                课程学习区
-              </div>
+              <div className="hidden text-xs text-muted-foreground sm:block">课程学习区</div>
             </div>
           </Link>
         </div>

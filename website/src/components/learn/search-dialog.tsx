@@ -1,11 +1,11 @@
 'use client'
 
+import { getHighlightParts, searchLessons } from '@/lib/lesson-search'
+import type { LessonSearchEntry } from '@/lib/lesson-search'
 import * as Dialog from '@radix-ui/react-dialog'
 import { ArrowRight, FileText, Search, X } from 'lucide-react'
 import Link from 'next/link'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { getHighlightParts, searchLessons } from '@/lib/lesson-search'
-import type { LessonSearchEntry } from '@/lib/lesson-search'
 
 interface SearchDialogProps {
   searchEntries: LessonSearchEntry[]
@@ -20,10 +20,7 @@ function HighlightedText({
 }) {
   return getHighlightParts(text, query).map((part, index) =>
     part.highlighted ? (
-      <mark
-        key={`${part.text}-${index}`}
-        className="rounded bg-yellow-300/70 px-0.5 text-inherit"
-      >
+      <mark key={`${part.text}-${index}`} className="rounded bg-yellow-300/70 px-0.5 text-inherit">
         {part.text}
       </mark>
     ) : (
@@ -37,14 +34,7 @@ export function SearchDialog({ searchEntries }: SearchDialogProps) {
   const [query, setQuery] = useState('')
   const [selectedIndex, setSelectedIndex] = useState(0)
 
-  const results = useMemo(
-    () => searchLessons(query, searchEntries),
-    [query, searchEntries]
-  )
-
-  useEffect(() => {
-    setSelectedIndex(0)
-  }, [query])
+  const results = useMemo(() => searchLessons(query, searchEntries), [query, searchEntries])
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -58,6 +48,11 @@ export function SearchDialog({ searchEntries }: SearchDialogProps) {
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [])
 
+  const handleQueryChange = (value: string) => {
+    setQuery(value)
+    setSelectedIndex(0)
+  }
+
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent) => {
       switch (event.key) {
@@ -68,9 +63,7 @@ export function SearchDialog({ searchEntries }: SearchDialogProps) {
         case 'ArrowUp':
           event.preventDefault()
           setSelectedIndex(
-            (current) =>
-              (current - 1 + Math.max(results.length, 1)) %
-              Math.max(results.length, 1)
+            (current) => (current - 1 + Math.max(results.length, 1)) % Math.max(results.length, 1)
           )
           break
         case 'Enter':
@@ -117,9 +110,8 @@ export function SearchDialog({ searchEntries }: SearchDialogProps) {
               type="text"
               placeholder="搜索课程、正文细节或标签..."
               value={query}
-              onChange={(event) => setQuery(event.target.value)}
+              onChange={(event) => handleQueryChange(event.target.value)}
               className="flex-1 bg-transparent text-base outline-none placeholder:text-muted-foreground"
-              autoFocus
             />
             <Dialog.Close asChild>
               <button
@@ -154,9 +146,7 @@ export function SearchDialog({ searchEntries }: SearchDialogProps) {
                     >
                       <div
                         className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-md ${
-                          index === selectedIndex
-                            ? 'bg-primary-foreground/20'
-                            : 'bg-secondary'
+                          index === selectedIndex ? 'bg-primary-foreground/20' : 'bg-secondary'
                         }`}
                       >
                         <FileText className="h-4 w-4" />
@@ -175,19 +165,14 @@ export function SearchDialog({ searchEntries }: SearchDialogProps) {
                         >
                           <HighlightedText
                             text={
-                              result.matchType === 'content'
-                                ? result.matchedText
-                                : result.subtitle
+                              result.matchType === 'content' ? result.matchedText : result.subtitle
                             }
                             query={query}
                           />
                           {result.matchType === 'tag' && (
                             <span className="ml-2 inline-flex items-center rounded-full bg-primary/10 px-2 py-0.5 text-xs">
                               #
-                              <HighlightedText
-                                text={result.matchedText}
-                                query={query}
-                              />
+                              <HighlightedText text={result.matchedText} query={query} />
                             </span>
                           )}
                           {result.matchType === 'content' && (
@@ -208,9 +193,7 @@ export function SearchDialog({ searchEntries }: SearchDialogProps) {
               </ul>
             ) : (
               <div className="py-6">
-                <p className="mb-4 text-center text-xs text-muted-foreground">
-                  快速跳转
-                </p>
+                <p className="mb-4 text-center text-xs text-muted-foreground">快速跳转</p>
                 <ul className="space-y-1">
                   {searchEntries.slice(0, 5).map((lesson) => (
                     <li key={lesson.id}>
@@ -234,25 +217,17 @@ export function SearchDialog({ searchEntries }: SearchDialogProps) {
           <div className="flex items-center justify-between border-t border-border px-4 py-2.5 text-xs text-muted-foreground">
             <div className="flex items-center gap-3">
               <span className="flex items-center gap-1">
-                <kbd className="rounded border border-border bg-secondary px-1.5 py-0.5">
-                  ↑
-                </kbd>
-                <kbd className="rounded border border-border bg-secondary px-1.5 py-0.5">
-                  ↓
-                </kbd>
+                <kbd className="rounded border border-border bg-secondary px-1.5 py-0.5">↑</kbd>
+                <kbd className="rounded border border-border bg-secondary px-1.5 py-0.5">↓</kbd>
                 <span>导航</span>
               </span>
               <span className="flex items-center gap-1">
-                <kbd className="rounded border border-border bg-secondary px-1.5 py-0.5">
-                  ↵
-                </kbd>
+                <kbd className="rounded border border-border bg-secondary px-1.5 py-0.5">↵</kbd>
                 <span>打开</span>
               </span>
             </div>
             <span className="flex items-center gap-1">
-              <kbd className="rounded border border-border bg-secondary px-1.5 py-0.5">
-                esc
-              </kbd>
+              <kbd className="rounded border border-border bg-secondary px-1.5 py-0.5">esc</kbd>
               <span>关闭</span>
             </span>
           </div>

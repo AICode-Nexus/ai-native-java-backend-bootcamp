@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { getHighlightParts, searchLessons } from './lesson-search.ts'
 import { getLessonSearchEntries } from './lesson-search.server.ts'
+import { getHighlightParts, searchLessons } from './lesson-search.ts'
 
 test('searchLessons matches lesson content beyond metadata', () => {
   const results = searchLessons('allowlist', getLessonSearchEntries())
@@ -11,12 +11,9 @@ test('searchLessons matches lesson content beyond metadata', () => {
 })
 
 test('getHighlightParts highlights case-insensitive matches', () => {
-  assert.deepEqual(
-    getHighlightParts('Tool allowlist protects execution', 'ALLOWLIST'),
-    [
-      { text: 'Tool ', highlighted: false },
-      { text: 'allowlist', highlighted: true },
-      { text: ' protects execution', highlighted: false },
-    ]
-  )
+  assert.deepEqual(getHighlightParts('Tool allowlist protects execution', 'ALLOWLIST'), [
+    { text: 'Tool ', highlighted: false },
+    { text: 'allowlist', highlighted: true },
+    { text: ' protects execution', highlighted: false },
+  ])
 })

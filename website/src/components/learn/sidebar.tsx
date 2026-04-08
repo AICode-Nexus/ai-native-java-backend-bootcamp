@@ -1,8 +1,8 @@
 'use client'
 
+import { lessons } from '@/lib/lessons'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { lessons } from '@/lib/lessons'
 import { useMobileNav } from './mobile-nav-context'
 
 function getNavClass(isActive: boolean): string {

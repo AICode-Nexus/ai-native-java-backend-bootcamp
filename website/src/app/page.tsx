@@ -1,11 +1,6 @@
-import Link from 'next/link'
 import { lessons } from '@/lib/lessons'
-import {
-  backendSystemMap,
-  corePrinciples,
-  courseStats,
-  resourceLinks,
-} from '@/lib/site-content'
+import { backendSystemMap, corePrinciples, courseStats, resourceLinks } from '@/lib/site-content'
+import Link from 'next/link'
 
 export default function HomePage() {
   return (
@@ -16,13 +11,12 @@ export default function HomePage() {
         </div>
         <div className="space-y-4">
           <h1 className="max-w-4xl text-4xl font-bold tracking-tight text-slate-950 md:text-5xl">
-            不是教 Java 怎么调一个模型接口，而是教如何构建可上线的 AI-Native
-            后端系统
+            不是教 Java 怎么调一个模型接口，而是教如何构建可上线的 AI-Native 后端系统
           </h1>
           <p className="max-w-3xl text-base leading-8 text-slate-600 md:text-lg">
             课程围绕企业知识助手主线，覆盖模型接入、聊天接口、Prompt
-            组织、知识入库、RAG、检索协同、Tool Calling、Workflow
-            和治理生产化，帮助 AI 应用开发者建立完整的后端系统观。
+            组织、知识入库、RAG、检索协同、Tool Calling、Workflow 和治理生产化，帮助 AI
+            应用开发者建立完整的后端系统观。
           </p>
         </div>
 
@@ -58,9 +52,7 @@ export default function HomePage() {
         <div className="grid gap-3 md:grid-cols-3">
           {backendSystemMap.map((item) => (
             <div key={item.layer} className="rounded-lg border bg-background p-4">
-              <div className="mb-2 text-sm font-medium text-muted-foreground">
-                {item.layer}
-              </div>
+              <div className="mb-2 text-sm font-medium text-muted-foreground">{item.layer}</div>
               <div className="space-y-1">
                 {item.techs.map((tech) => (
                   <div key={tech} className="text-sm font-medium">

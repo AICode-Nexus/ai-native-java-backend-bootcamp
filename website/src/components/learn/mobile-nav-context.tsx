@@ -26,11 +26,7 @@ export function MobileNavProvider({
     [isOpen]
   )
 
-  return (
-    <MobileNavContext.Provider value={value}>
-      {children}
-    </MobileNavContext.Provider>
-  )
+  return <MobileNavContext.Provider value={value}>{children}</MobileNavContext.Provider>
 }
 
 export function useMobileNav(): MobileNavContextValue {

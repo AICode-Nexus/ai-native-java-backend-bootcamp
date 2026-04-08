@@ -1,5 +1,5 @@
-import { buildProcessedLessonContent } from './lesson-markdown.ts'
 import { getLessonFileSpecs, readLessonMarkdown } from './lesson-files.ts'
+import { buildProcessedLessonContent } from './lesson-markdown.ts'
 import type { LessonSearchEntry } from './lesson-search.ts'
 
 function stripMarkdown(content: string): string {

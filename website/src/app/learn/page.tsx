@@ -1,6 +1,6 @@
-import Link from 'next/link'
 import { lessons } from '@/lib/lessons'
 import { backendSystemMap, corePrinciples, courseStats } from '@/lib/site-content'
+import Link from 'next/link'
 
 export default function LearnPage() {
   return (
@@ -15,9 +15,7 @@ export default function LearnPage() {
         </p>
         <div className="flex flex-wrap gap-4 text-sm text-muted-foreground md:gap-6">
           {courseStats.map((item) => (
-            <span key={item.label}>
-              {item.value}
-            </span>
+            <span key={item.label}>{item.value}</span>
           ))}
         </div>
       </div>
@@ -27,9 +25,7 @@ export default function LearnPage() {
         <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
           {backendSystemMap.map((item) => (
             <div key={item.layer} className="rounded-lg border bg-background p-3">
-              <div className="mb-1 text-xs font-medium text-muted-foreground">
-                {item.layer}
-              </div>
+              <div className="mb-1 text-xs font-medium text-muted-foreground">{item.layer}</div>
               {item.techs.map((tech) => (
                 <div key={tech} className="text-sm font-medium">
                   {tech}

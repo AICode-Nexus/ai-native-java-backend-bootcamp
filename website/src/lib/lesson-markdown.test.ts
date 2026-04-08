@@ -19,9 +19,7 @@ test('buildProcessedLessonContent removes the page title before TOC generation',
 
 test('all lesson markdown files generate unique toc ids', () => {
   const workspaceRoot = path.resolve(process.cwd(), '..')
-  const lessonDirs = fs
-    .readdirSync(workspaceRoot)
-    .filter((name) => /^第\d+课-/.test(name))
+  const lessonDirs = fs.readdirSync(workspaceRoot).filter((name) => /^第\d+课-/.test(name))
 
   for (const lessonDir of lessonDirs) {
     const markdownPath = path.join(workspaceRoot, lessonDir, 'final-content.md')

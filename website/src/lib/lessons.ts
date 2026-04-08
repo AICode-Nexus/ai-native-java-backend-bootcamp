@@ -18,7 +18,7 @@ export const lessons: Lesson[] = [
     duration: '2h',
     tags: ['认知', '系统边界', '课程主线'],
     dirName: '第0课-认知重构',
-    summary: '建立 AI-Native Java 后端的整体认知框架，明确课程主线和系统分层。'
+    summary: '建立 AI-Native Java 后端的整体认知框架，明确课程主线和系统分层。',
   },
   {
     id: 'lesson-1',
@@ -28,7 +28,7 @@ export const lessons: Lesson[] = [
     duration: '2.5h',
     tags: ['Spring Boot', '模型接入', '网关'],
     dirName: '第1课-Spring-Boot-接入模型',
-    summary: '从直接调用到统一网关，建立可演进的模型接入边界。'
+    summary: '从直接调用到统一网关，建立可演进的模型接入边界。',
   },
   {
     id: 'lesson-2',
@@ -38,7 +38,7 @@ export const lessons: Lesson[] = [
     duration: '2.5h',
     tags: ['Chat API', 'SSE', '接口契约'],
     dirName: '第2课-对话接口与流式输出',
-    summary: '把模型能力升级成业务系统可稳定消费的聊天接口。'
+    summary: '把模型能力升级成业务系统可稳定消费的聊天接口。',
   },
   {
     id: 'lesson-3',
@@ -48,7 +48,7 @@ export const lessons: Lesson[] = [
     duration: '2.5h',
     tags: ['Prompt', '上下文', '结构化输出'],
     dirName: '第3课-Prompt-上下文与结构化输出',
-    summary: '把 Prompt、会话上下文和结构化响应组织成清晰的服务层能力。'
+    summary: '把 Prompt、会话上下文和结构化响应组织成清晰的服务层能力。',
   },
   {
     id: 'lesson-4',
@@ -58,7 +58,7 @@ export const lessons: Lesson[] = [
     duration: '2.5h',
     tags: ['文档上传', '切片', '知识入库'],
     dirName: '第4课-文件解析与知识入库',
-    summary: '搭建从上传、清洗到切片入库的最小知识处理链路。'
+    summary: '搭建从上传、清洗到切片入库的最小知识处理链路。',
   },
   {
     id: 'lesson-5',
@@ -68,7 +68,7 @@ export const lessons: Lesson[] = [
     duration: '2.5h',
     tags: ['RAG', '引用', '检索增强'],
     dirName: '第5课-RAG-检索增强',
-    summary: '建立带引用、可降级、可解释的最小 RAG 回答链路。'
+    summary: '建立带引用、可降级、可解释的最小 RAG 回答链路。',
   },
   {
     id: 'lesson-6',
@@ -78,7 +78,7 @@ export const lessons: Lesson[] = [
     duration: '2.5h',
     tags: ['Redis', 'Elasticsearch', 'Vector'],
     dirName: '第6课-Redis-ES-向量检索协同',
-    summary: '讲清缓存、关键词检索与语义召回的职责边界与组合方式。'
+    summary: '讲清缓存、关键词检索与语义召回的职责边界与组合方式。',
   },
   {
     id: 'lesson-7',
@@ -88,7 +88,7 @@ export const lessons: Lesson[] = [
     duration: '2.5h',
     tags: ['Agent', 'Tools', 'Allowlist'],
     dirName: '第7课-Agent-Tools',
-    summary: '明确 Tool、Agent、注册表和执行边界，控制动作型能力的风险。'
+    summary: '明确 Tool、Agent、注册表和执行边界，控制动作型能力的风险。',
   },
   {
     id: 'lesson-8',
@@ -98,7 +98,7 @@ export const lessons: Lesson[] = [
     duration: '2.5h',
     tags: ['Workflow', 'MQ', '异步任务'],
     dirName: '第8课-Workflow-与-MQ',
-    summary: '用编排和消息队列承载长耗时、可重试、可追踪的任务流。'
+    summary: '用编排和消息队列承载长耗时、可重试、可追踪的任务流。',
   },
   {
     id: 'lesson-9',
@@ -108,7 +108,7 @@ export const lessons: Lesson[] = [
     duration: '2.5h',
     tags: ['治理', '安全', '可观测'],
     dirName: '第9课-AI-工程化治理',
-    summary: '建立日志、规则、评测、成本与安全的最小治理闭环。'
+    summary: '建立日志、规则、评测、成本与安全的最小治理闭环。',
   },
   {
     id: 'lesson-10',
@@ -118,7 +118,7 @@ export const lessons: Lesson[] = [
     duration: '2.5h',
     tags: ['业务融合', 'SQL 助手', '只读'],
     dirName: '第10课-业务融合与数据助手',
-    summary: '以只读 SQL 助手为例，讲清业务增强场景里的输入输出控制。'
+    summary: '以只读 SQL 助手为例，讲清业务增强场景里的输入输出控制。',
   },
   {
     id: 'lesson-11',
@@ -128,6 +128,6 @@ export const lessons: Lesson[] = [
     duration: '2.5h',
     tags: ['生产化', '整合', '演进路线'],
     dirName: '第11课-全链路整合与生产化',
-    summary: '收束课程主线，建立从 demo 到生产的分层演进路线。'
-  }
+    summary: '收束课程主线，建立从 demo 到生产的分层演进路线。',
+  },
 ]

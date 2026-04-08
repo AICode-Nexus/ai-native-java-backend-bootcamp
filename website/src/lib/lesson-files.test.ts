@@ -9,10 +9,6 @@ test('every lesson metadata entry resolves to an existing final-content.md', () 
 
   for (const spec of specs) {
     assert.equal(spec.contentPath.endsWith('/final-content.md'), true)
-    assert.equal(
-      readLessonMarkdown(spec.id).length > 0,
-      true,
-      `${spec.id} should load markdown`
-    )
+    assert.equal(readLessonMarkdown(spec.id).length > 0, true, `${spec.id} should load markdown`)
   }
 })

@@ -1,8 +1,8 @@
-import Link from 'next/link'
-import { notFound } from 'next/navigation'
 import { LessonContent } from '@/components/learn/lesson-content'
 import { readLessonMarkdown } from '@/lib/lesson-files'
 import { lessons } from '@/lib/lessons'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
 
 export function generateStaticParams() {
   return lessons.map((lesson) => ({
@@ -42,10 +42,7 @@ export default async function LessonPage({
         <p className="mb-4 text-lg text-muted-foreground">{lesson.subtitle}</p>
         <div className="flex flex-wrap gap-2">
           {lesson.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-full bg-primary/10 px-2.5 py-1 text-xs text-primary"
-            >
+            <span key={tag} className="rounded-full bg-primary/10 px-2.5 py-1 text-xs text-primary">
               {tag}
             </span>
           ))}
@@ -66,10 +63,7 @@ export default async function LessonPage({
 
       <div className="mt-16 flex justify-between border-t pt-8">
         {previousLesson ? (
-          <Link
-            href={`/learn/${previousLesson.id}`}
-            className="group flex flex-col items-start"
-          >
+          <Link href={`/learn/${previousLesson.id}`} className="group flex flex-col items-start">
             <span className="mb-1 text-xs text-muted-foreground">上一课</span>
             <span className="text-xs font-medium transition-colors group-hover:text-primary md:text-sm">
               ← 第 {previousLesson.number} 课：{previousLesson.title}
