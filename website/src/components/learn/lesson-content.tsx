@@ -5,6 +5,7 @@ import {
   buildProcessedLessonContent,
   extractTextContent,
   generateToc,
+  resolveLessonLink,
   slugifyHeading,
 } from '@/lib/lesson-markdown'
 import mermaid from 'mermaid'
@@ -126,7 +127,13 @@ function TableOfContents({ toc }: { toc: TocItem[] }) {
   )
 }
 
-export function LessonContent({ content }: { content: string }) {
+export function LessonContent({
+  content,
+  lessonDirName,
+}: {
+  content: string
+  lessonDirName: string
+}) {
   const processedContent = buildProcessedLessonContent(content)
   const toc = generateToc(processedContent)
   let headingIndex = 0
@@ -322,14 +329,17 @@ export function LessonContent({ content }: { content: string }) {
               </strong>
             ),
             a: ({ children, href, ...props }) => {
-              const isAnchor = href?.startsWith('#')
+              const resolvedLink = resolveLessonLink(href, lessonDirName)
+              const isAnchor = resolvedLink.href.startsWith('#')
+
               return (
                 <a
-                  href={href}
-                  {...(!isAnchor && {
-                    target: '_blank',
-                    rel: 'noopener noreferrer',
-                  })}
+                  href={resolvedLink.href}
+                  {...(resolvedLink.external &&
+                    !isAnchor && {
+                      target: '_blank',
+                      rel: 'noopener noreferrer',
+                    })}
                   className="text-primary hover:underline"
                   {...props}
                 >

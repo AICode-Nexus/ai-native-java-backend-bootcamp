@@ -10,3 +10,19 @@ test('learn shell files are present and wired through the learn layout', () => {
   assert.match(layoutSource, /<Sidebar/)
   assert.match(layoutSource, /getLessonSearchEntries/)
 })
+
+test('root layout opts in to smooth-scroll route transitions', () => {
+  const rootLayoutSource = fs.readFileSync(path.join(process.cwd(), 'src/app/layout.tsx'), 'utf8')
+
+  assert.match(rootLayoutSource, /data-scroll-behavior="smooth"/)
+})
+
+test('search dialog includes Radix title and description semantics', () => {
+  const searchDialogSource = fs.readFileSync(
+    path.join(process.cwd(), 'src/components/learn/search-dialog.tsx'),
+    'utf8'
+  )
+
+  assert.match(searchDialogSource, /<Dialog\.Title/)
+  assert.match(searchDialogSource, /<Dialog\.Description/)
+})

@@ -6,6 +6,13 @@ export interface TocItem {
   level: number
 }
 
+interface ResolvedLessonLink {
+  href: string
+  external: boolean
+}
+
+const GITHUB_REPO_BASE = 'https://github.com/AICode-Nexus/ai-native-java-backend-bootcamp'
+
 function normalizeHeadingText(text: string): string {
   return text.replace(/[`*_~]/g, '').trim()
 }
@@ -42,6 +49,59 @@ export function buildProcessedLessonContent(content: string): string {
     .replace(/^\*\*风格\*\*:.+\n/m, '')
     .replace(/^>\s+.+\n/m, '')
     .trim()
+}
+
+function encodeGitHubPath(path: string): string {
+  return path.split('/').map(encodeURIComponent).join('/')
+}
+
+function looksLikeFile(repoPath: string): boolean {
+  const basename = repoPath.split('/').pop() ?? ''
+  return basename.includes('.')
+}
+
+export function resolveLessonLink(
+  href: string | undefined,
+  lessonDirName: string
+): ResolvedLessonLink {
+  if (!href) {
+    return {
+      href: '#',
+      external: false,
+    }
+  }
+
+  if (href.startsWith('#') || href.startsWith('/')) {
+    return {
+      href,
+      external: false,
+    }
+  }
+
+  if (/^(https?:)?\/\//.test(href) || href.startsWith('mailto:') || href.startsWith('tel:')) {
+    return {
+      href,
+      external: true,
+    }
+  }
+
+  if (href.startsWith('../') || href.startsWith('./')) {
+    const resolvedPath = decodeURIComponent(
+      new URL(href, `https://repo.local/${encodeURIComponent(lessonDirName)}/`).pathname
+    ).replace(/^\/+/, '')
+
+    const gitHubView = looksLikeFile(resolvedPath) ? 'blob' : 'tree'
+
+    return {
+      href: `${GITHUB_REPO_BASE}/${gitHubView}/main/${encodeGitHubPath(resolvedPath)}`,
+      external: true,
+    }
+  }
+
+  return {
+    href,
+    external: false,
+  }
 }
 
 export function generateToc(content: string): TocItem[] {

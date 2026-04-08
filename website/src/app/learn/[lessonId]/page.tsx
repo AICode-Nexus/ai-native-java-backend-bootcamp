@@ -53,7 +53,7 @@ export default async function LessonPage({
       </div>
 
       {content ? (
-        <LessonContent content={content} />
+        <LessonContent content={content} lessonDirName={lesson.dirName} />
       ) : (
         <div className="rounded-xl border border-dashed p-12 text-center text-muted-foreground">
           <p className="mb-2 text-lg">课程内容加载中...</p>

@@ -104,6 +104,10 @@ export function SearchDialog({ searchEntries }: SearchDialogProps) {
           className="fixed left-1/2 top-[20%] z-50 w-full max-w-lg -translate-x-1/2 rounded-xl border border-border bg-background shadow-2xl"
           onKeyDown={handleKeyDown}
         >
+          <Dialog.Title className="sr-only">搜索课程</Dialog.Title>
+          <Dialog.Description className="sr-only">
+            按课程标题、标签或正文关键词快速跳转到对应章节。
+          </Dialog.Description>
           <div className="flex items-center gap-3 border-b border-border px-4 py-3">
             <Search className="h-5 w-5 text-muted-foreground" />
             <input
