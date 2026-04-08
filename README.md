@@ -1,86 +1,89 @@
-# AI-Native Java Backend Bootcamp
+# AI 辅助后端研发 Bootcamp
 
-> 面向 AI 应用开发者的 Java 后端训练营仓库
+> 面向 Java / Spring Boot 工程师的 AI 研发提效训练营仓库
 
 ## 这套仓库解决什么问题
 
-这套训练营不是教“Java 如何调用一个模型接口”，而是教“如何用 Java / Spring Boot 构建可上线、可治理、可演进的 AI-Native 后端系统”。
+这套训练营不再主讲“如何从 0 到 1 做一个 AI-Native 后端系统”，而是主讲：
 
-课程主线围绕一个企业知识助手展开，逐步覆盖：
+**传统后端开发者，如何把 AI 接进需求、设计、编码、测试、联调、排障、发布与复盘这些日常研发流程。**
 
-- 模型接入
-- 对话接口与流式输出
-- Prompt、上下文与结构化结果
-- 文件解析、知识入库与 RAG
-- Redis、Elasticsearch、向量检索协同
-- Tool Calling、Workflow 与异步任务
-- AI 工程化治理
-- 业务融合与生产化
+很多团队已经开始用 AI 写几段代码，但常见问题依然很多：
+
+- 会生成代码，不会澄清需求
+- 会补几段实现，不会约束分层和边界
+- 会让 AI 写测试名字，不会把它用进回归与验收
+- 会问模型“怎么修”，却没有把日志、异常、监控、发布检查串成稳定工作流
+
+这套仓库的目标，就是把“AI 辅助后端研发”讲成一条清晰、可重复、可团队化落地的主线。
 
 ## 适合谁学
 
-- 主受众：AI 应用开发者
-- 兼顾受众：希望补足后端能力的前端工程师
-- 主技术栈：Java 21 + Spring Boot 3.x
-- 主业务场景：企业知识助手
+- 主受众：Java / Spring Boot 后端工程师
+- 兼顾受众：技术负责人、全栈工程师、希望建立 AI 协作工作流的开发者
+- 默认语言与栈：Java 21 + Spring Boot 3.x
+- 课程目标：提效传统后端研发流程，而不是绑定某个 AI 编码工具
 
 ## 仓库怎么使用
 
 推荐按下面顺序学习：
 
-1. 先读本页，建立课程总地图
-2. 启动 `website/` 课程站，从统一入口浏览课程结构
-3. 再读对应课程目录下的 `final-content.md`
-4. 对照 `demo/` 主项目理解代码边界
-5. 最后完成 `课后练习/` 中的分层练习
+1. 先读本页，建立课程地图
+2. 启动 `website/` 课程站，从统一入口浏览主线课程和进阶专题
+3. 按顺序阅读 12 节主线课的 `final-content.md`
+4. 对照 `demo/` 示例项目理解 AI 在真实后端代码中的使用边界
+5. 完成 `课后练习/` 中按 lesson number 对应的练习
+6. 学完主线后，再进入 `进阶专题/` 阅读 AI-Native 系统建设内容
 
-如果你是授课者，可以把本仓库直接当作课程讲义、代码骨架和练习包来使用。
+## 主线课程总览
 
-## 课程总览
+| 课程 | 主题 | 正文 |
+|------|------|------|
+| 第0课 | AI 时代后端工程师的工作流重构 | [进入课程](./第0课-AI时代后端工程师的工作流重构/final-content.md) |
+| 第1课 | 用 AI 做需求理解与任务拆解 | [进入课程](./第1课-用AI做需求理解与任务拆解/final-content.md) |
+| 第2课 | 用 AI 做接口设计与数据建模 | [进入课程](./第2课-用AI做接口设计与数据建模/final-content.md) |
+| 第3课 | 用 AI 辅助搭 Spring Boot 工程骨架 | [进入课程](./第3课-用AI辅助搭Spring-Boot工程骨架/final-content.md) |
+| 第4课 | 用 AI 写业务代码，但守住边界 | [进入课程](./第4课-用AI写业务代码但守住边界/final-content.md) |
+| 第5课 | 用 AI 补测试、造样例、做回归 | [进入课程](./第5课-用AI补测试造样例做回归/final-content.md) |
+| 第6课 | 用 AI 联调接口与排查问题 | [进入课程](./第6课-用AI联调接口与排查问题/final-content.md) |
+| 第7课 | 用 AI 辅助 SQL、缓存与性能分析 | [进入课程](./第7课-用AI辅助SQL缓存与性能分析/final-content.md) |
+| 第8课 | 用 AI 做重构、代码审查与风险发现 | [进入课程](./第8课-用AI做重构代码审查与风险发现/final-content.md) |
+| 第9课 | 用 AI 写文档、设计说明与交接材料 | [进入课程](./第9课-用AI写文档设计说明与交接材料/final-content.md) |
+| 第10课 | 用 AI 参与发布检查、监控分析与故障复盘 | [进入课程](./第10课-用AI参与发布检查监控分析与故障复盘/final-content.md) |
+| 第11课 | 团队级 AI 开发规范与落地路线 | [进入课程](./第11课-团队级AI开发规范与落地路线/final-content.md) |
 
-| 课程 | 主题 | 课程正文 | 课后练习 | 对应主模块 |
-|------|------|----------|----------|------------|
-| 第0课 | 认知重构 | [进入课程](./第0课-认知重构/final-content.md) | [练习](./课后练习/第0课/练习.md) | `README` `课程设计文档` |
-| 第1课 | Spring Boot 接入模型 | [进入课程](./第1课-Spring-Boot-接入模型/final-content.md) | [练习](./课后练习/第1课/练习.md) | `ai/model` |
-| 第2课 | 对话接口与流式输出 | [进入课程](./第2课-对话接口与流式输出/final-content.md) | [练习](./课后练习/第2课/练习.md) | `chat` |
-| 第3课 | Prompt、上下文与结构化输出 | [进入课程](./第3课-Prompt-上下文与结构化输出/final-content.md) | [练习](./课后练习/第3课/练习.md) | `chat` `common/api` |
-| 第4课 | 文件解析与知识入库 | [进入课程](./第4课-文件解析与知识入库/final-content.md) | [练习](./课后练习/第4课/练习.md) | `knowledge/document` |
-| 第5课 | RAG 检索增强 | [进入课程](./第5课-RAG-检索增强/final-content.md) | [练习](./课后练习/第5课/练习.md) | `knowledge/rag` `knowledge/retrieve` |
-| 第6课 | Redis、ES、向量检索协同 | [进入课程](./第6课-Redis-ES-向量检索协同/final-content.md) | [练习](./课后练习/第6课/练习.md) | `cache` `search` `vector` |
-| 第7课 | Agent 与 Tools | [进入课程](./第7课-Agent-Tools/final-content.md) | [练习](./课后练习/第7课/练习.md) | `agent/tool` |
-| 第8课 | Workflow 与 MQ | [进入课程](./第8课-Workflow-与-MQ/final-content.md) | [练习](./课后练习/第8课/练习.md) | `workflow` `task` |
-| 第9课 | AI 工程化治理 | [进入课程](./第9课-AI-工程化治理/final-content.md) | [练习](./课后练习/第9课/练习.md) | `ai/safety` `ops` `evals` |
-| 第10课 | 业务融合与数据助手 | [进入课程](./第10课-业务融合与数据助手/final-content.md) | [练习](./课后练习/第10课/练习.md) | `dataassistant` |
-| 第11课 | 全链路整合与生产化 | [进入课程](./第11课-全链路整合与生产化/final-content.md) | [练习](./课后练习/第11课/练习.md) | 全链路收束与生产演进 |
+## 进阶专题
 
-## `demo/` 主项目里有什么
+主线课程讲的是“怎么用 AI 提效研发流程”。
+如果你已经把这条主线跑顺，想继续走向 AI 产品与 AI 系统建设，可以继续看下面 4 个进阶专题：
 
-当前主项目采用“教学友好的模块化单体”，优先把边界和主链路讲清楚，而不是一开始就堆满真实基础设施。
+| 专题 | 主题 | 正文 |
+|------|------|------|
+| 专题1 | 模型接入与 AI 能力边界 | [进入专题](./进阶专题/专题1-模型接入与AI能力边界/final-content.md) |
+| 专题2 | RAG 与企业知识系统 | [进入专题](./进阶专题/专题2-RAG与企业知识系统/final-content.md) |
+| 专题3 | Tools、Workflow 与 Agent 边界 | [进入专题](./进阶专题/专题3-Tools-Workflow-与-Agent-边界/final-content.md) |
+| 专题4 | AI 系统治理与生产化 | [进入专题](./进阶专题/专题4-AI系统治理与生产化/final-content.md) |
 
-核心目录大致如下：
+## `demo/` 示例项目里有什么
 
-- `demo/src/main/java/com/example/ainative/ai`
-  模型接入边界与安全策略
-- `demo/src/main/java/com/example/ainative/chat`
-  对话接口、请求响应对象、聊天服务
-- `demo/src/main/java/com/example/ainative/knowledge`
-  文档上传、切片、RAG、引用、检索接口
-- `demo/src/main/java/com/example/ainative/cache`
-  会话记忆与热点缓存示例
-- `demo/src/main/java/com/example/ainative/search`
-  关键词检索示例
-- `demo/src/main/java/com/example/ainative/vector`
-  向量存储边界
-- `demo/src/main/java/com/example/ainative/agent`
-  Tool 定义、注册与执行结果
-- `demo/src/main/java/com/example/ainative/workflow`
-  固定流程编排
-- `demo/src/main/java/com/example/ainative/task`
-  异步任务发布与消费骨架
-- `demo/src/main/java/com/example/ainative/dataassistant`
-  业务融合示例，当前为只读 SQL 助手
-- `demo/src/main/java/com/example/ainative/ops`
-  请求日志、指标等工程治理能力
+`demo/` 不再被定义为“这门课最终要一步步搭出的 AI 产品”，而是：
+
+- 一个可阅读、可测试、可改造的 Spring Boot 示例项目
+- 一组适合做需求澄清、接口设计、测试补齐、排障、重构演练的后端代码样本
+- 一套可用于讲解代码边界、命名、模块职责、风险控制的教学素材
+
+当前主模块仍然保留：
+
+- `ai/`
+- `chat/`
+- `knowledge/`
+- `agent/`
+- `workflow/`
+- `task/`
+- `dataassistant/`
+- `ops/`
+
+但这些模块现在主要服务于“如何借助 AI 阅读、改造、验证、交接后端代码”，而不是要求学员沿着它们继续做完整 AI 产品。
 
 ## 快速开始
 
@@ -96,70 +99,40 @@ pnpm dev
 
 - `http://localhost:3000`
 - `http://localhost:3000/learn`
+- `http://localhost:3000/advanced`
 
-### 2. 运行后端测试
+### 2. 运行网站校验
+
+```bash
+cd website
+pnpm test
+pnpm build
+```
+
+### 3. 运行后端测试
 
 ```bash
 cd demo
 ./mvnw test
 ```
 
-### 3. 启动本地后端服务
+## 仓库资产
 
-```bash
-cd demo
-./mvnw spring-boot:run
-```
+当前仓库包含：
 
-### 4. 验证健康检查
-
-启动后可访问：
-
-- `GET /api/health`
-
-## 推荐学习路径
-
-如果你偏后端基础，可以按标准顺序从第 0 课开始。  
-如果你已经做过一些 AI 应用，但后端体系感还不够，建议重点看下面三条线：
-
-### 主链路线
-
-- 第1课：模型接入
-- 第2课：对话与流式接口
-- 第4课：文件解析与知识入库
-- 第5课：RAG 检索增强
-
-### 能力扩展线
-
-- 第6课：多检索底座协同
-- 第7课：Tool 与 Agent 边界
-- 第8课：Workflow 与异步任务
-
-### 工程落地线
-
-- 第9课：治理
-- 第10课：业务融合
-- 第11课：生产化收束
-
-## 课程资产
-
-当前仓库已经包含：
-
-- 一个独立课程网站 `website/`
-- 每课一篇 `final-content.md`
-- 每课一份课后练习
-- 一个贯穿主项目 `demo/`
+- 12 节主线课程
+- 4 个进阶专题
+- 一套课程网站 `website/`
+- 一个 Java / Spring Boot 示例项目 `demo/`
+- 一组课后练习
 - 顶层课程设计文档与演讲大纲
-- 基础 CI 检查与最小 evals 样例
 
 ## 相关文档
 
 - [课程设计文档.md](./课程设计文档.md)
-- [AI-Native-Java项目配置模板.md](./AI-Native-Java项目配置模板.md)
 - [演讲大纲.md](./演讲大纲.md)
+- [示例项目说明](./demo/README.md)
 - [课后练习总览](./课后练习/README.md)
-- [课程网站设计文档](./docs/superpowers/specs/2026-04-08-ai-native-java-backend-website-design.md)
-- [课程网站实现计划](./docs/superpowers/plans/2026-04-08-ai-native-java-backend-website-implementation.md)
 
 ## 公众号 / 获取更新
 

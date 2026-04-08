@@ -1,13 +1,20 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { getLessonSearchEntries } from './lesson-search.server.ts'
-import { getHighlightParts, searchLessons } from './lesson-search.ts'
+import { getSearchEntries } from './lesson-search.server.ts'
+import { getHighlightParts, searchContent } from './lesson-search.ts'
 
-test('searchLessons matches lesson content beyond metadata', () => {
-  const results = searchLessons('allowlist', getLessonSearchEntries())
+test('searchContent matches both main courses and advanced topics', () => {
+  const results = searchContent('RAG', getSearchEntries())
 
   assert.equal(results.length > 0, true)
-  assert.equal(results[0]?.id, 'lesson-7')
+  assert.equal(
+    results.some((result) => result.section === 'advanced'),
+    true
+  )
+  assert.equal(
+    results.some((result) => result.id === 'advanced-rag-enterprise-knowledge'),
+    true
+  )
 })
 
 test('getHighlightParts highlights case-insensitive matches', () => {

@@ -1,10 +1,10 @@
-import type { Lesson } from './lessons.ts'
+import type { LearningEntry } from './lessons.ts'
 
-export interface LessonSearchEntry extends Lesson {
+export type SearchEntry = LearningEntry & {
   content: string
 }
 
-export interface LessonSearchResult extends Lesson {
+export type SearchResult = LearningEntry & {
   matchType: 'title' | 'subtitle' | 'tag' | 'content'
   matchedText: string
 }
@@ -73,40 +73,40 @@ export function getHighlightParts(text: string, query: string): HighlightPart[] 
   return parts
 }
 
-export function searchLessons(query: string, entries: LessonSearchEntry[]): LessonSearchResult[] {
+export function searchContent(query: string, entries: SearchEntry[]): SearchResult[] {
   if (!query.trim()) {
     return []
   }
 
   const lowerQuery = query.toLowerCase()
-  const results: LessonSearchResult[] = []
+  const results: SearchResult[] = []
 
-  for (const lesson of entries) {
-    if (lesson.title.toLowerCase().includes(lowerQuery)) {
-      results.push({ ...lesson, matchType: 'title', matchedText: lesson.title })
+  for (const entry of entries) {
+    if (entry.title.toLowerCase().includes(lowerQuery)) {
+      results.push({ ...entry, matchType: 'title', matchedText: entry.title })
       continue
     }
 
-    if (lesson.subtitle.toLowerCase().includes(lowerQuery)) {
+    if (entry.subtitle.toLowerCase().includes(lowerQuery)) {
       results.push({
-        ...lesson,
+        ...entry,
         matchType: 'subtitle',
-        matchedText: lesson.subtitle,
+        matchedText: entry.subtitle,
       })
       continue
     }
 
-    const matchedTag = lesson.tags.find((tag) => tag.toLowerCase().includes(lowerQuery))
+    const matchedTag = entry.tags.find((tag) => tag.toLowerCase().includes(lowerQuery))
     if (matchedTag) {
-      results.push({ ...lesson, matchType: 'tag', matchedText: matchedTag })
+      results.push({ ...entry, matchType: 'tag', matchedText: matchedTag })
       continue
     }
 
-    if (lesson.content.toLowerCase().includes(lowerQuery)) {
+    if (entry.content.toLowerCase().includes(lowerQuery)) {
       results.push({
-        ...lesson,
+        ...entry,
         matchType: 'content',
-        matchedText: buildContentExcerpt(lesson.content, query),
+        matchedText: buildContentExcerpt(entry.content, query),
       })
     }
   }

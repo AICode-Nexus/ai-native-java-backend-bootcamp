@@ -3,9 +3,15 @@ export interface SiteStat {
   value: string
 }
 
-export interface SystemMapItem {
-  layer: string
-  techs: string[]
+export interface LifecycleStep {
+  stage: string
+  actions: string[]
+}
+
+export interface LearningTrack {
+  title: string
+  href: string
+  description: string
 }
 
 export interface CorePrinciple {
@@ -22,43 +28,55 @@ export interface ResourceLink {
 const repoBaseUrl = 'https://github.com/AICode-Nexus/ai-native-java-backend-bootcamp'
 
 export const courseStats: SiteStat[] = [
-  { label: '课程数量', value: '12 节课' },
-  { label: '主技术栈', value: 'Java 21 + Spring Boot 3.x' },
-  { label: '主业务场景', value: '企业知识助手' },
+  { label: '主线课程', value: '12 节' },
+  { label: '进阶专题', value: '4 个' },
+  { label: '技术底座', value: 'Java 21 + Spring Boot 3.x' },
 ]
 
-export const backendSystemMap: SystemMapItem[] = [
-  { layer: '模型接入层', techs: ['Spring Boot', 'Provider Gateway'] },
-  { layer: '接口层', techs: ['REST', 'SSE', '统一响应'] },
-  { layer: 'Prompt / Context 层', techs: ['Prompt 模板', '上下文管理'] },
-  { layer: '知识层', techs: ['文件解析', '切片', '知识入库'] },
-  { layer: 'RAG 层', techs: ['Retriever', 'Citation', 'Grounded Answer'] },
-  { layer: '检索协同层', techs: ['Redis', 'Elasticsearch', 'Vector'] },
-  { layer: '工具层', techs: ['Tool Registry', 'Allowlist', 'Agent'] },
-  { layer: '流程层', techs: ['Workflow', 'MQ', 'Async Task'] },
-  { layer: '治理层', techs: ['Safety', 'Metrics', 'Evals', 'Ops'] },
+export const developerLifecycleMap: LifecycleStep[] = [
+  { stage: '需求理解', actions: ['澄清问题', '拆解任务', '补齐边界'] },
+  { stage: '接口设计', actions: ['设计 DTO', '整理错误码', '锁定契约'] },
+  { stage: '工程搭建', actions: ['模块切分', '脚手架草图', '最小骨架'] },
+  { stage: '编码实现', actions: ['补样板', '守分层', '收敛职责'] },
+  { stage: '测试验证', actions: ['边界样例', '回归清单', '真实运行'] },
+  { stage: '联调排障', actions: ['整理证据', '压缩排查路径', '沉淀复现记录'] },
+  { stage: '发布运维', actions: ['发布检查', '监控摘要', '故障复盘'] },
+  { stage: '团队落地', actions: ['统一模板', '规范沉淀', '试点推广'] },
+]
+
+export const learningTracks: LearningTrack[] = [
+  {
+    title: '主线课程',
+    href: '/learn',
+    description: '围绕传统后端研发全流程，讲清 AI 在每个研发动作里的正确位置。',
+  },
+  {
+    title: '进阶专题',
+    href: '/advanced',
+    description: '独立保留 AI-Native 系统建设内容，作为完成主线后的进阶阅读。',
+  },
 ]
 
 export const corePrinciples: CorePrinciple[] = [
   {
-    title: '边界先行',
-    description: '先把模型、检索、工具和业务边界讲清楚，再谈能力堆叠。',
+    title: '工作流优先',
+    description: '先定义研发动作和验证方式，再决定 AI 参与在哪一步。',
   },
   {
-    title: '链路优先',
-    description: '课程围绕企业知识助手主链路推进，而不是散点示例拼装。',
+    title: '上下文先行',
+    description: '不给真实代码、约束和目标，AI 只会生成看起来合理的猜测。',
   },
   {
-    title: '治理内建',
-    description: '日志、规则、评测和安全从一开始就是系统能力，不是后补。',
+    title: '验证必选',
+    description: '测试、构建、日志和评审是 AI 协作的收口动作，不是附属步骤。',
   },
   {
-    title: '渐进演进',
-    description: '优先教学友好的模块化单体，再逐步替换真实基础设施。',
+    title: '边界明确',
+    description: '生成速度不能替代分层、权限、兼容性和风险边界。',
   },
   {
-    title: '对比驱动',
-    description: '每节课都用“深讲一个、横向对比多个”的方式建立判断力。',
+    title: '团队复用',
+    description: '课程目标不是个人提效技巧，而是可被团队复用的模板和规范。',
   },
 ]
 
@@ -66,17 +84,17 @@ export const resourceLinks: ResourceLink[] = [
   {
     label: '仓库 README',
     href: `${repoBaseUrl}#readme`,
-    description: '课程总览、学习路径与仓库入口。',
+    description: '课程总览、学习路径与主线入口。',
   },
   {
-    label: 'Java Demo',
+    label: 'Java 示例项目',
     href: `${repoBaseUrl}/blob/main/demo/README.md`,
-    description: '贯穿训练营的 Spring Boot 主项目说明。',
+    description: '用于需求、设计、测试、排障和交接演练的 Spring Boot 项目。',
   },
   {
     label: '课程设计文档',
     href: `${repoBaseUrl}/blob/main/%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3.md`,
-    description: '完整课程设计、主线和章节目标。',
+    description: '完整课程定位、主线与进阶专题设计。',
   },
   {
     label: '社区与更新',

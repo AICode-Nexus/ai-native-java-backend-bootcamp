@@ -5,10 +5,12 @@ import test from 'node:test'
 
 test('learn shell files are present and wired through the learn layout', () => {
   const layoutSource = fs.readFileSync(path.join(process.cwd(), 'src/app/learn/layout.tsx'), 'utf8')
+  const advancedPagePath = path.join(process.cwd(), 'src/app/advanced/page.tsx')
 
   assert.match(layoutSource, /<Header/)
   assert.match(layoutSource, /<Sidebar/)
-  assert.match(layoutSource, /getLessonSearchEntries/)
+  assert.match(layoutSource, /getSearchEntries/)
+  assert.equal(fs.existsSync(advancedPagePath), true)
 })
 
 test('root layout opts in to smooth-scroll route transitions', () => {
@@ -25,4 +27,5 @@ test('search dialog includes Radix title and description semantics', () => {
 
   assert.match(searchDialogSource, /<Dialog\.Title/)
   assert.match(searchDialogSource, /<Dialog\.Description/)
+  assert.match(searchDialogSource, /sectionLabel/)
 })

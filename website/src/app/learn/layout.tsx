@@ -1,14 +1,14 @@
 import { Header } from '@/components/learn/header'
 import { MobileNavProvider } from '@/components/learn/mobile-nav-context'
 import { Sidebar } from '@/components/learn/sidebar'
-import { getLessonSearchEntries } from '@/lib/lesson-search.server'
+import { getSearchEntries } from '@/lib/lesson-search.server'
 
 export default function LearnLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const searchEntries = getLessonSearchEntries()
+  const searchEntries = getSearchEntries()
 
   return (
     <MobileNavProvider>

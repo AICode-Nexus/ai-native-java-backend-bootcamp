@@ -43,7 +43,7 @@ test('resolveLessonLink rewrites repo-relative markdown links to GitHub URLs', (
   assert.deepEqual(
     resolveLessonLink(
       '../demo/src/main/java/com/example/ainative/agent/tool/ToolRegistry.java',
-      '第7课-Agent-Tools'
+      '第8课-用AI做重构代码审查与风险发现'
     ),
     {
       href: 'https://github.com/AICode-Nexus/ai-native-java-backend-bootcamp/blob/main/demo/src/main/java/com/example/ainative/agent/tool/ToolRegistry.java',
@@ -54,7 +54,7 @@ test('resolveLessonLink rewrites repo-relative markdown links to GitHub URLs', (
   assert.deepEqual(
     resolveLessonLink(
       '../demo/src/main/java/com/example/ainative/agent',
-      '第11课-全链路整合与生产化'
+      '第11课-团队级AI开发规范与落地路线'
     ),
     {
       href: 'https://github.com/AICode-Nexus/ai-native-java-backend-bootcamp/tree/main/demo/src/main/java/com/example/ainative/agent',
@@ -62,13 +62,16 @@ test('resolveLessonLink rewrites repo-relative markdown links to GitHub URLs', (
     }
   )
 
-  assert.deepEqual(resolveLessonLink('#本课小结', '第7课-Agent-Tools'), {
+  assert.deepEqual(resolveLessonLink('#本课小结', '第8课-用AI做重构代码审查与风险发现'), {
     href: '#本课小结',
     external: false,
   })
 
-  assert.deepEqual(resolveLessonLink('https://example.com/docs', '第7课-Agent-Tools'), {
-    href: 'https://example.com/docs',
-    external: true,
-  })
+  assert.deepEqual(
+    resolveLessonLink('https://example.com/docs', '第8课-用AI做重构代码审查与风险发现'),
+    {
+      href: 'https://example.com/docs',
+      external: true,
+    }
+  )
 })

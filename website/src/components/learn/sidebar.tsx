@@ -1,6 +1,6 @@
 'use client'
 
-import { lessons } from '@/lib/lessons'
+import { advancedTopics, mainCourses } from '@/lib/lessons'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useMobileNav } from './mobile-nav-context'
@@ -24,7 +24,16 @@ function SidebarContent() {
           pathname === '/learn'
         )}`}
       >
-        课程总览
+        主线课程总览
+      </Link>
+      <Link
+        href="/advanced"
+        onClick={close}
+        className={`block rounded-md px-3 py-2 text-sm font-medium transition-colors ${getNavClass(
+          pathname === '/advanced'
+        )}`}
+      >
+        进阶专题总览
       </Link>
 
       <div className="px-3 pb-1 pt-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground md:hidden">
@@ -47,17 +56,16 @@ function SidebarContent() {
       </a>
 
       <div className="px-3 pb-1 pt-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-        课程目录
+        主线课程
       </div>
 
-      {lessons.map((lesson) => {
-        const href = `/learn/${lesson.id}`
-        const isActive = pathname === href
+      {mainCourses.map((course) => {
+        const isActive = pathname === course.href
 
         return (
           <Link
-            key={lesson.id}
-            href={href}
+            key={course.id}
+            href={course.href}
             onClick={close}
             className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors ${getNavClass(
               isActive
@@ -70,11 +78,44 @@ function SidebarContent() {
                   : 'bg-secondary text-muted-foreground'
               }`}
             >
-              {lesson.number}
+              {course.number}
             </span>
             <div className="min-w-0">
-              <div className="truncate font-medium">{lesson.title}</div>
-              <div className="truncate text-xs opacity-70">{lesson.subtitle}</div>
+              <div className="truncate font-medium">{course.title}</div>
+              <div className="truncate text-xs opacity-70">{course.subtitle}</div>
+            </div>
+          </Link>
+        )
+      })}
+
+      <div className="px-3 pb-1 pt-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+        进阶专题
+      </div>
+
+      {advancedTopics.map((topic) => {
+        const isActive = pathname === topic.href
+
+        return (
+          <Link
+            key={topic.id}
+            href={topic.href}
+            onClick={close}
+            className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors ${getNavClass(
+              isActive
+            )}`}
+          >
+            <span
+              className={`flex h-6 w-6 shrink-0 items-center justify-center rounded text-xs font-bold ${
+                isActive
+                  ? 'bg-primary-foreground/20 text-primary-foreground'
+                  : 'bg-secondary text-muted-foreground'
+              }`}
+            >
+              专{topic.number}
+            </span>
+            <div className="min-w-0">
+              <div className="truncate font-medium">{topic.title}</div>
+              <div className="truncate text-xs opacity-70">{topic.subtitle}</div>
             </div>
           </Link>
         )

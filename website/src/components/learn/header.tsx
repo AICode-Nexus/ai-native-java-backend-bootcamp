@@ -1,12 +1,12 @@
 'use client'
 
-import type { LessonSearchEntry } from '@/lib/lesson-search'
+import type { SearchEntry } from '@/lib/lesson-search'
 import Link from 'next/link'
 import { useMobileNav } from './mobile-nav-context'
 import { SearchDialog } from './search-dialog'
 
 interface HeaderProps {
-  searchEntries: LessonSearchEntry[]
+  searchEntries: SearchEntry[]
 }
 
 export function Header({ searchEntries }: HeaderProps) {
@@ -97,7 +97,7 @@ export function Header({ searchEntries }: HeaderProps) {
               role="img"
               aria-labelledby="site-logo-title"
             >
-              <title id="site-logo-title">AI-Native Java Backend Bootcamp 标志</title>
+              <title id="site-logo-title">AI 辅助后端研发 Bootcamp 标志</title>
               <defs>
                 <linearGradient id="backend-grad" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" style={{ stopColor: '#38bdf8', stopOpacity: 1 }} />
@@ -109,8 +109,10 @@ export function Header({ searchEntries }: HeaderProps) {
               <rect x="4" y="22" width="16" height="5" rx="2.5" fill="url(#backend-grad)" />
             </svg>
             <div>
-              <div className="text-sm font-semibold">AI-Native Java Backend Bootcamp</div>
-              <div className="hidden text-xs text-muted-foreground sm:block">课程学习区</div>
+              <div className="text-sm font-semibold">AI 辅助后端研发 Bootcamp</div>
+              <div className="hidden text-xs text-muted-foreground sm:block">
+                主线课程 / 进阶专题
+              </div>
             </div>
           </Link>
         </div>
@@ -129,7 +131,13 @@ export function Header({ searchEntries }: HeaderProps) {
               href="/learn"
               className="text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
-              课程学习
+              主线课程
+            </Link>
+            <Link
+              href="/advanced"
+              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+            >
+              进阶专题
             </Link>
             <a
               href="https://github.com/AICode-Nexus/ai-native-java-backend-bootcamp"

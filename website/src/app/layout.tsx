@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'AI-Native Java Backend Bootcamp',
-  description: 'AI-Native Java Backend Bootcamp 课程网站',
+  title: 'AI 辅助后端研发 Bootcamp',
+  description: '面向 Java / Spring Boot 工程师的 AI 研发提效课程网站',
   icons: {
     icon: '/favicon.svg',
   },

@@ -1,14 +1,34 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { getLessonFileSpecs, readLessonMarkdown } from './lesson-files.ts'
+import {
+  getAdvancedTopicFileSpecs,
+  getMainCourseFileSpecs,
+  readAdvancedTopicMarkdown,
+  readMainCourseMarkdown,
+} from './lesson-files.ts'
 
-test('every lesson metadata entry resolves to an existing final-content.md', () => {
-  const specs = getLessonFileSpecs()
+test('every main course and advanced topic entry resolves to an existing final-content.md', () => {
+  const mainCourseSpecs = getMainCourseFileSpecs()
+  const advancedTopicSpecs = getAdvancedTopicFileSpecs()
 
-  assert.equal(specs.length, 12)
+  assert.equal(mainCourseSpecs.length, 12)
+  assert.equal(advancedTopicSpecs.length, 4)
 
-  for (const spec of specs) {
+  for (const spec of mainCourseSpecs) {
     assert.equal(spec.contentPath.endsWith('/final-content.md'), true)
-    assert.equal(readLessonMarkdown(spec.id).length > 0, true, `${spec.id} should load markdown`)
+    assert.equal(
+      readMainCourseMarkdown(spec.id).length > 0,
+      true,
+      `${spec.id} should load markdown`
+    )
+  }
+
+  for (const spec of advancedTopicSpecs) {
+    assert.equal(spec.contentPath.endsWith('/final-content.md'), true)
+    assert.equal(
+      readAdvancedTopicMarkdown(spec.id).length > 0,
+      true,
+      `${spec.id} should load markdown`
+    )
   }
 })

@@ -1,6 +1,7 @@
-import { getLessonFileSpecs, readLessonMarkdown } from './lesson-files.ts'
+import { getAllContentFileSpecs } from './lesson-files.ts'
+import { readAdvancedTopicMarkdown, readMainCourseMarkdown } from './lesson-files.ts'
 import { buildProcessedLessonContent } from './lesson-markdown.ts'
-import type { LessonSearchEntry } from './lesson-search.ts'
+import type { SearchEntry } from './lesson-search.ts'
 
 function stripMarkdown(content: string): string {
   return content
@@ -17,9 +18,13 @@ function stripMarkdown(content: string): string {
     .trim()
 }
 
-export function getLessonSearchEntries(): LessonSearchEntry[] {
-  return getLessonFileSpecs().map(({ contentPath: _contentPath, ...lesson }) => ({
-    ...lesson,
-    content: stripMarkdown(buildProcessedLessonContent(readLessonMarkdown(lesson.id))),
+function readEntryMarkdown(id: string, section: SearchEntry['section']): string {
+  return section === 'main' ? readMainCourseMarkdown(id) : readAdvancedTopicMarkdown(id)
+}
+
+export function getSearchEntries(): SearchEntry[] {
+  return getAllContentFileSpecs().map(({ contentPath: _contentPath, ...entry }) => ({
+    ...entry,
+    content: stripMarkdown(buildProcessedLessonContent(readEntryMarkdown(entry.id, entry.section))),
   }))
 }

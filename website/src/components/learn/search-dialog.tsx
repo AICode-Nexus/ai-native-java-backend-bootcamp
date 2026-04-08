@@ -1,14 +1,14 @@
 'use client'
 
-import { getHighlightParts, searchLessons } from '@/lib/lesson-search'
-import type { LessonSearchEntry } from '@/lib/lesson-search'
+import { getHighlightParts, searchContent } from '@/lib/lesson-search'
+import type { SearchEntry } from '@/lib/lesson-search'
 import * as Dialog from '@radix-ui/react-dialog'
 import { ArrowRight, FileText, Search, X } from 'lucide-react'
 import Link from 'next/link'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 interface SearchDialogProps {
-  searchEntries: LessonSearchEntry[]
+  searchEntries: SearchEntry[]
 }
 
 function HighlightedText({
@@ -34,7 +34,7 @@ export function SearchDialog({ searchEntries }: SearchDialogProps) {
   const [query, setQuery] = useState('')
   const [selectedIndex, setSelectedIndex] = useState(0)
 
-  const results = useMemo(() => searchLessons(query, searchEntries), [query, searchEntries])
+  const results = useMemo(() => searchContent(query, searchEntries), [query, searchEntries])
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -53,29 +53,26 @@ export function SearchDialog({ searchEntries }: SearchDialogProps) {
     setSelectedIndex(0)
   }
 
-  const handleKeyDown = useCallback(
-    (event: React.KeyboardEvent) => {
-      switch (event.key) {
-        case 'ArrowDown':
-          event.preventDefault()
-          setSelectedIndex((current) => (current + 1) % Math.max(results.length, 1))
-          break
-        case 'ArrowUp':
-          event.preventDefault()
-          setSelectedIndex(
-            (current) => (current - 1 + Math.max(results.length, 1)) % Math.max(results.length, 1)
-          )
-          break
-        case 'Enter':
-          if (results[selectedIndex]) {
-            setOpen(false)
-            window.location.href = `/learn/${results[selectedIndex].id}`
-          }
-          break
-      }
-    },
-    [results, selectedIndex]
-  )
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    switch (event.key) {
+      case 'ArrowDown':
+        event.preventDefault()
+        setSelectedIndex((current) => (current + 1) % Math.max(results.length, 1))
+        break
+      case 'ArrowUp':
+        event.preventDefault()
+        setSelectedIndex(
+          (current) => (current - 1 + Math.max(results.length, 1)) % Math.max(results.length, 1)
+        )
+        break
+      case 'Enter':
+        if (results[selectedIndex]) {
+          setOpen(false)
+          window.location.href = results[selectedIndex].href
+        }
+        break
+    }
+  }
 
   const handleClose = () => {
     setOpen(false)
@@ -91,7 +88,7 @@ export function SearchDialog({ searchEntries }: SearchDialogProps) {
           className="flex items-center gap-2 rounded-md border border-border bg-secondary/50 px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
         >
           <Search className="h-4 w-4" />
-          <span className="hidden sm:inline">搜索课程...</span>
+          <span className="hidden sm:inline">搜索课程或专题...</span>
           <kbd className="hidden h-5 items-center gap-0.5 rounded border border-border bg-background px-1.5 font-mono text-xs text-muted-foreground md:inline-flex">
             <span className="text-xs">⌘</span>K
           </kbd>
@@ -106,13 +103,13 @@ export function SearchDialog({ searchEntries }: SearchDialogProps) {
         >
           <Dialog.Title className="sr-only">搜索课程</Dialog.Title>
           <Dialog.Description className="sr-only">
-            按课程标题、标签或正文关键词快速跳转到对应章节。
+            按主线课程、进阶专题、标签或正文关键词快速跳转。
           </Dialog.Description>
           <div className="flex items-center gap-3 border-b border-border px-4 py-3">
             <Search className="h-5 w-5 text-muted-foreground" />
             <input
               type="text"
-              placeholder="搜索课程、正文细节或标签..."
+              placeholder="搜索课程、专题、正文细节或标签..."
               value={query}
               onChange={(event) => handleQueryChange(event.target.value)}
               className="flex-1 bg-transparent text-base outline-none placeholder:text-muted-foreground"
@@ -132,7 +129,7 @@ export function SearchDialog({ searchEntries }: SearchDialogProps) {
             {query && results.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-8 text-center text-muted-foreground">
                 <Search className="mb-3 h-10 w-10 opacity-50" />
-                <p className="text-sm">未找到匹配的课程</p>
+                <p className="text-sm">未找到匹配的课程或专题</p>
                 <p className="mt-1 text-xs">尝试其他关键词</p>
               </div>
             ) : results.length > 0 ? (
@@ -140,7 +137,7 @@ export function SearchDialog({ searchEntries }: SearchDialogProps) {
                 {results.map((result, index) => (
                   <li key={result.id}>
                     <Link
-                      href={`/learn/${result.id}`}
+                      href={result.href}
                       onClick={handleClose}
                       className={`flex items-center gap-3 rounded-lg px-3 py-2.5 transition-colors ${
                         index === selectedIndex
@@ -156,9 +153,22 @@ export function SearchDialog({ searchEntries }: SearchDialogProps) {
                         <FileText className="h-4 w-4" />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <div className="truncate font-medium">
-                          第{result.number}课 ·{' '}
-                          <HighlightedText text={result.title} query={query} />
+                        <div className="mb-1 flex flex-wrap items-center gap-2">
+                          <span
+                            className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium ${
+                              index === selectedIndex
+                                ? 'bg-primary-foreground/20 text-primary-foreground'
+                                : 'bg-primary/10 text-primary'
+                            }`}
+                          >
+                            {result.sectionLabel}
+                          </span>
+                          <span className="truncate font-medium">
+                            {result.section === 'main'
+                              ? `第${result.number}课`
+                              : `专题${result.number}`}{' '}
+                            · <HighlightedText text={result.title} query={query} />
+                          </span>
                         </div>
                         <div
                           className={`truncate text-xs ${
@@ -199,17 +209,17 @@ export function SearchDialog({ searchEntries }: SearchDialogProps) {
               <div className="py-6">
                 <p className="mb-4 text-center text-xs text-muted-foreground">快速跳转</p>
                 <ul className="space-y-1">
-                  {searchEntries.slice(0, 5).map((lesson) => (
-                    <li key={lesson.id}>
+                  {searchEntries.slice(0, 6).map((entry) => (
+                    <li key={entry.id}>
                       <Link
-                        href={`/learn/${lesson.id}`}
+                        href={entry.href}
                         onClick={handleClose}
                         className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
                       >
-                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded bg-secondary text-xs font-medium">
-                          {lesson.number}
+                        <span className="flex h-6 min-w-10 shrink-0 items-center justify-center rounded bg-secondary px-2 text-xs font-medium">
+                          {entry.section === 'main' ? `课${entry.number}` : `专题${entry.number}`}
                         </span>
-                        <span className="truncate">{lesson.title}</span>
+                        <span className="truncate">{entry.title}</span>
                       </Link>
                     </li>
                   ))}
