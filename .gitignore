@@ -21,6 +21,7 @@ demo/tmp/
 
 # Local toolchains
 .tools/
+.codex/
 
 # Local git worktrees
 .worktrees/
