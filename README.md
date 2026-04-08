@@ -95,7 +95,7 @@ pnpm dev
 启动后可访问：
 
 - `http://localhost:3000`
-- `http://localhost:3000/learn`（学习区，开发中）
+- `http://localhost:3000/learn`
 
 ### 2. 运行后端测试
 
@@ -158,6 +158,8 @@ cd demo
 - [AI-Native-Java项目配置模板.md](./AI-Native-Java项目配置模板.md)
 - [演讲大纲.md](./演讲大纲.md)
 - [课后练习总览](./课后练习/README.md)
+- [课程网站设计文档](./docs/superpowers/specs/2026-04-08-ai-native-java-backend-website-design.md)
+- [课程网站实现计划](./docs/superpowers/plans/2026-04-08-ai-native-java-backend-website-implementation.md)
 
 ## 公众号 / 获取更新
 
